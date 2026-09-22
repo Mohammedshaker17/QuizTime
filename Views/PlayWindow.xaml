@@ -1,12 +1,33 @@
 ﻿<Window x:Class="QuizTime.Views.PlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuizTime.Views"
-        mc:Ignorable="d"
-        Title="PlayWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Quiz Time - Speelscherm" Height="500" Width="800"
+        Background="#1E1E2F" WindowStartupLocation="CenterScreen">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- De aftel-timer; alleen gevuld in "spelen"-modus, leeg in "nakijken"-modus -->
+        <TextBlock x:Name="TimerText" Grid.Row="0" Text="" FontSize="28" Foreground="White"
+                   HorizontalAlignment="Right" Margin="0,0,0,20"/>
+
+        <!-- De vraagtekst: groot en duidelijk leesbaar voor het publiek -->
+        <TextBlock x:Name="QuestionText" Grid.Row="1" Text="Wachten op vraag..." FontSize="32"
+                   FontWeight="Bold" Foreground="White" TextWrapping="Wrap" Margin="0,0,0,30"/>
+
+        <!-- De antwoordmogelijkheden; elke optie is een eigen "vak" (Border) -->
+        <ItemsControl x:Name="OptionsList" Grid.Row="2">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!-- Background wordt in code-behind op groen gezet zodra dit het juiste antwoord is -->
+                    <Border Background="{Binding Background}" CornerRadius="8" Margin="0,0,0,10" Padding="15">
+                        <TextBlock Text="{Binding Text}" FontSize="22" Foreground="White"/>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>
