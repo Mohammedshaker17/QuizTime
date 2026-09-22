@@ -9,7 +9,6 @@ namespace QuizTime
     /// </summary>
     public partial class App : Application
     {
-        patat
     }
 
 }
