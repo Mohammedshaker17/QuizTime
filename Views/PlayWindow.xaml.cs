@@ -36,6 +36,8 @@ namespace QuizTime.Views
         // - showAnswer: true = het juiste antwoord moet groen gemarkeerd worden.
         public void ShowQuestion(Question question, bool isReviewMode, bool showAnswer)
         {
+            CategoryText.Text = question.Category;
+
             QuestionText.Text = question.Text;
 
             // We bouwen per antwoordoptie een "OptionDisplay"-object: de tekst

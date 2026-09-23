@@ -1,20 +1,29 @@
 {
-  "title": "Voorbeeldquiz - Algemene Kennis",
+  "title": "Voorbeeldquiz - Gemengde Categorieën",
   "questions": [
     {
-      "text": "Wat is de hoofdstad van Nederland?",
-      "options": [ "Rotterdam", "Amsterdam", "Utrecht", "Den Haag" ],
-      "correctAnswerIndex": 1
+      "text": "Wat is het snelste landdier ter wereld?",
+      "options": [ "Cheetah", "Leeuw", "Gazelle", "Paard" ],
+      "correctAnswerIndex": 0,
+      "category": "Dieren"
     },
     {
-      "text": "Hoeveel is 7 x 8?",
-      "options": [ "54", "56", "58", "64" ],
-      "correctAnswerIndex": 1
+      "text": "Hoeveel poten heeft een spin?",
+      "options": [ "6", "8", "10", "4" ],
+      "correctAnswerIndex": 1,
+      "category": "Dieren"
     },
     {
       "text": "In welk jaar viel de Berlijnse Muur?",
       "options": [ "1987", "1989", "1991", "1993" ],
-      "correctAnswerIndex": 1
+      "correctAnswerIndex": 1,
+      "category": "Geschiedenis"
+    },
+    {
+      "text": "Wie zette als eerste mens voet op de maan?",
+      "options": [ "Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "John Glenn" ],
+      "correctAnswerIndex": 1,
+      "category": "Geschiedenis"
     }
   ]
 }

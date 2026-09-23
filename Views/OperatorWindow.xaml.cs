@@ -1,63 +1,105 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using QuizTime.Models;
 using QuizTime.Services;
 
 namespace QuizTime.Views
 {
     // Dit venster is het "bedieningspaneel" voor de quizmaster (operator).
-    // Vanuit hier kies je de modus (spelen/nakijken) en stuur je aan welke
-    // vraag op het speelscherm (PlayWindow) te zien is.
+    // Vanuit hier kies je een categorie, de modus (spelen/nakijken), en stuur je
+    // aan welke vraag op het speelscherm (PlayWindow) te zien is.
     public partial class OperatorWindow : Window
     {
-        // De service die de quizdata voor ons inlaadt vanuit het JSON-bestand.
         private readonly QuizService _quizService = new();
 
-        // De volledige, ingeladen quiz (titel + alle vragen).
+        // Alle vragen uit het JSON-bestand, ongefilterd.
         private Quiz _quiz = new();
 
-        // Houdt bij bij welke vraag we op dit moment zijn.
-        // Index 0 = eerste vraag (lijsten in C# beginnen bij 0).
+        // De vragen die op dit moment "actief" zijn: alleen de vragen van de
+        // gekozen categorie (of alle vragen, als "Alle categorieën" gekozen is).
+        // Dit is de lijst waar de operator daadwerkelijk doorheen navigeert.
+        private List<Question> _activeQuestions = new();
+
         private int _currentQuestionIndex = 0;
-
-        // Referentie naar het scherm dat aan het publiek getoond wordt.
-        // "?" betekent dat deze waarde ook null (leeg) mag zijn, bijvoorbeeld
-        // voordat de operator een modus heeft gekozen.
         private PlayWindow? _playWindow;
-
-        // Onthoudt welke modus actief is, zodat we weten hoe we het
-        // speelscherm moeten laten reageren (met of zonder timer).
         private bool _isReviewMode = false;
+
+        // Vaste tekst voor de optie die ALLE categorieën samen toont.
+        private const string AllCategoriesOption = "Alle categorieën";
 
         public OperatorWindow()
         {
             InitializeComponent();
 
-            // Zodra dit venster opent, laden we meteen de quizvragen in.
             _quiz = _quizService.LoadQuiz();
             StatusText.Text = $"Quiz geladen: \"{_quiz.Title}\" ({_quiz.Questions.Count} vragen).";
+
+            FillCategoryComboBox();
         }
 
-        // Wordt aangeroepen wanneer de operator op "Start Quiz Spelen" klikt.
+        // Vult de ComboBox met alle unieke categorieën uit de quiz, plus "Alle categorieën".
+        private void FillCategoryComboBox()
+        {
+            // Distinct() haalt dubbele categorieën eruit (anders staat "Dieren" er twee keer in).
+            var categories = _quiz.Questions
+                .Select(q => q.Category)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+            var items = new List<string> { AllCategoriesOption };
+            items.AddRange(categories);
+
+            CategoryComboBox.ItemsSource = items;
+            CategoryComboBox.SelectedIndex = 0; // standaard: alle categorieën
+        }
+
+        // Filtert _quiz.Questions op basis van de categorie die in de ComboBox is gekozen,
+        // en zet het resultaat in _activeQuestions.
+        private void ApplyCategoryFilter()
+        {
+            string? selected = CategoryComboBox.SelectedItem as string;
+
+            if (string.IsNullOrEmpty(selected) || selected == AllCategoriesOption)
+            {
+                _activeQuestions = _quiz.Questions;
+            }
+            else
+            {
+                _activeQuestions = _quiz.Questions
+                    .Where(q => q.Category == selected)
+                    .ToList();
+            }
+
+            _currentQuestionIndex = 0;
+        }
+
         private void StartPlayButton_Click(object sender, RoutedEventArgs e)
         {
             _isReviewMode = false;
-            _currentQuestionIndex = 0;
+            ApplyCategoryFilter();
             RevealAnswerButton.Visibility = Visibility.Collapsed;
             OpenPlayWindow();
         }
 
-        // Wordt aangeroepen wanneer de operator op "Start Quiz Nakijken" klikt.
         private void StartReviewButton_Click(object sender, RoutedEventArgs e)
         {
             _isReviewMode = true;
-            _currentQuestionIndex = 0;
+            ApplyCategoryFilter();
             RevealAnswerButton.Visibility = Visibility.Visible;
             OpenPlayWindow();
         }
 
-        // Opent het speelscherm (als het nog niet open is) en toont daarin de huidige vraag.
         private void OpenPlayWindow()
         {
+            // Als de gekozen categorie geen vragen bevat, waarschuwen we en stoppen we hier.
+            if (_activeQuestions.Count == 0)
+            {
+                StatusText.Text = "Geen vragen gevonden voor deze categorie.";
+                return;
+            }
+
             if (_playWindow == null || !_playWindow.IsLoaded)
             {
                 _playWindow = new PlayWindow();
@@ -67,32 +109,26 @@ namespace QuizTime.Views
             ShowCurrentQuestion();
         }
 
-        // Stuurt de huidige vraag door naar het speelscherm, passend bij de gekozen modus.
         private void ShowCurrentQuestion()
         {
-            if (_playWindow == null || _quiz.Questions.Count == 0)
+            if (_playWindow == null || _activeQuestions.Count == 0)
                 return;
 
-            var question = _quiz.Questions[_currentQuestionIndex];
-
-            // In spelen-modus: vraag + timer, antwoord blijft verborgen.
-            // In nakijk-modus: vraag zonder timer, antwoord verschijnt pas na een klik.
+            var question = _activeQuestions[_currentQuestionIndex];
             _playWindow.ShowQuestion(question, _isReviewMode, showAnswer: false);
 
-            StatusText.Text = $"Vraag {_currentQuestionIndex + 1} van {_quiz.Questions.Count}.";
+            StatusText.Text = $"Vraag {_currentQuestionIndex + 1} van {_activeQuestions.Count}.";
         }
 
-        // Ga naar de volgende vraag, als die er is.
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentQuestionIndex < _quiz.Questions.Count - 1)
+            if (_currentQuestionIndex < _activeQuestions.Count - 1)
             {
                 _currentQuestionIndex++;
                 ShowCurrentQuestion();
             }
         }
 
-        // Ga terug naar de vorige vraag, als die er is.
         private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
             if (_currentQuestionIndex > 0)
@@ -102,13 +138,12 @@ namespace QuizTime.Views
             }
         }
 
-        // Alleen zinvol in nakijk-modus: toont het juiste antwoord op het speelscherm.
         private void RevealAnswerButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_playWindow == null || _quiz.Questions.Count == 0)
+            if (_playWindow == null || _activeQuestions.Count == 0)
                 return;
 
-            var question = _quiz.Questions[_currentQuestionIndex];
+            var question = _activeQuestions[_currentQuestionIndex];
             _playWindow.ShowQuestion(question, _isReviewMode, showAnswer: true);
         }
     }

@@ -10,19 +10,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- De aftel-timer; alleen gevuld in "spelen"-modus, leeg in "nakijken"-modus -->
-        <TextBlock x:Name="TimerText" Grid.Row="0" Text="" FontSize="28" Foreground="White"
-                   HorizontalAlignment="Right" Margin="0,0,0,20"/>
+        <!-- Rij met de categorie (links) en de aftel-timer (rechts) naast elkaar -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock x:Name="CategoryText" DockPanel.Dock="Left" Text="" FontSize="20"
+                       Foreground="#AAAAFF" FontWeight="SemiBold"/>
+            <TextBlock x:Name="TimerText" DockPanel.Dock="Right" Text="" FontSize="28" Foreground="White"/>
+        </DockPanel>
 
-        <!-- De vraagtekst: groot en duidelijk leesbaar voor het publiek -->
+        <!-- De vraagtekst -->
         <TextBlock x:Name="QuestionText" Grid.Row="1" Text="Wachten op vraag..." FontSize="32"
                    FontWeight="Bold" Foreground="White" TextWrapping="Wrap" Margin="0,0,0,30"/>
 
-        <!-- De antwoordmogelijkheden; elke optie is een eigen "vak" (Border) -->
+        <!-- De antwoordmogelijkheden -->
         <ItemsControl x:Name="OptionsList" Grid.Row="2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <!-- Background wordt in code-behind op groen gezet zodra dit het juiste antwoord is -->
                     <Border Background="{Binding Background}" CornerRadius="8" Margin="0,0,0,10" Padding="15">
                         <TextBlock Text="{Binding Text}" FontSize="22" Foreground="White"/>
                     </Border>
