@@ -1,1 +1,40 @@
-﻿
+﻿<Window x:Class="QuizTime.Views.PlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quiz Time - Speelscherm" Height="500" Width="800"
+        Background="#1E1E2F" WindowStartupLocation="CenterScreen">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Categorie (links) en timer (rechts) naast elkaar -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock x:Name="CategoryText" DockPanel.Dock="Left" Text="Dieren" FontSize="20"
+                       Foreground="#AAAAFF" FontWeight="SemiBold"/>
+            <TextBlock x:Name="TimerText" DockPanel.Dock="Right" Text="30" FontSize="28" Foreground="White"/>
+        </DockPanel>
+
+        <TextBlock x:Name="QuestionText" Grid.Row="1" Text="Wat is het snelste landdier ter wereld?" FontSize="32"
+                   FontWeight="Bold" Foreground="White" TextWrapping="Wrap" Margin="0,0,0,30"/>
+
+        <!-- Voorlopig 4 vaste (hardcoded) antwoordvakken, alleen om het uiterlijk te zien.
+             Later (bij de Backend-stap) vervangen we dit door echte, dynamische data. -->
+        <StackPanel Grid.Row="2">
+            <Border Background="#2D2D44" CornerRadius="8" Margin="0,0,0,10" Padding="15">
+                <TextBlock Text="Cheetah" FontSize="22" Foreground="White"/>
+            </Border>
+            <Border Background="#2D2D44" CornerRadius="8" Margin="0,0,0,10" Padding="15">
+                <TextBlock Text="Leeuw" FontSize="22" Foreground="White"/>
+            </Border>
+            <Border Background="#2D2D44" CornerRadius="8" Margin="0,0,0,10" Padding="15">
+                <TextBlock Text="Gazelle" FontSize="22" Foreground="White"/>
+            </Border>
+            <Border Background="#2D2D44" CornerRadius="8" Margin="0,0,0,10" Padding="15">
+                <TextBlock Text="Paard" FontSize="22" Foreground="White"/>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

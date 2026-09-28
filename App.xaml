@@ -1,9 +1,9 @@
 ﻿<Application x:Class="QuizTime.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuizTime"
-             StartupUri="Views/OperatorWindow.xaml">
+             xmlns:local="clr-namespace:QuizTime">
     <Application.Resources>
          
     </Application.Resources>
 </Application>
+    
