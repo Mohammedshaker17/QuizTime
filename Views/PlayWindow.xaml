@@ -10,7 +10,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Categorie (links) en timer (rechts) naast elkaar -->
+       
         <DockPanel Grid.Row="0" Margin="0,0,0,20">
             <TextBlock x:Name="CategoryText" DockPanel.Dock="Left" Text="Dieren" FontSize="20"
                        FontWeight="SemiBold"/>
@@ -20,9 +20,7 @@
         <TextBlock x:Name="QuestionText" Grid.Row="1" Text="Wat is het snelste landdier ter wereld?" FontSize="32"
                    FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,30"/>
 
-        <!-- Voorlopig 4 vaste (hardcoded) antwoordvakken, alleen om het uiterlijk te zien.
-             Later (bij de Backend-stap) vervangen we dit door echte, dynamische data. -->
-        <StackPanel Grid.Row="2">
+             <StackPanel Grid.Row="2">
             <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="15">
                 <TextBlock Text="Cheetah" FontSize="22"/>
             </Border>

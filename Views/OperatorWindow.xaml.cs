@@ -32,6 +32,11 @@ namespace QuizTime.Views
 
         }
 
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AdminWindow { Owner = this }.ShowDialog();
+        }
+
         private void CategoryComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
