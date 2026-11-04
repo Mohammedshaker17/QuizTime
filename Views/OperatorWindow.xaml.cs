@@ -11,5 +11,30 @@ namespace QuizTime.Views
         {
             InitializeComponent();
         }
+
+        private void StartReviewButton_Click(object sender, RoutedEventArgs e)
+        { 
+
+        }
+
+        private void StartPlayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CategoryComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

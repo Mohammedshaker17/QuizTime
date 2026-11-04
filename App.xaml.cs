@@ -12,9 +12,6 @@ namespace QuizTime
         {
             base.OnStartup(e);
 
-            // مؤقتاً (بمرحلة "الشكل بس")، نفتح النافذتين مع بعض عشان نشوفهم سوا.
-            // بعدين، لما نوصل لمرحلة المنطق، بيصير: OperatorWindow تفتح لحالها تلقائيًا،
-            // و PlayWindow تفتح فقط لما تضغط "Start Quiz" من الكود (مو تلقائيًا).
             var operatorWindow = new Views.OperatorWindow();
             var playWindow = new Views.PlayWindow();
 
