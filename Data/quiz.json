@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "Title": "Aardrijkskunde",
+    "Questions": [
+      {
+        "Id": 1,
+        "QuizId": 1,
+        "Text": "Wat is de hoofdstad van Nederland?",
+        "TimeLimitSeconds": 20,
+        "Answers": [
+          {
+            "Id": 1,
+            "QuestionId": 1,
+            "Label": "A",
+            "Text": "Rotterdam",
+            "IsCorrect": false
+          },
+          {
+            "Id": 2,
+            "QuestionId": 1,
+            "Label": "B",
+            "Text": "Amsterdam",
+            "IsCorrect": true
+          },
+          {
+            "Id": 3,
+            "QuestionId": 1,
+            "Label": "C",
+            "Text": "Den Haag",
+            "IsCorrect": false
+          },
+          {
+            "Id": 4,
+            "QuestionId": 1,
+            "Label": "D",
+            "Text": "Utrecht",
+            "IsCorrect": false
+          }
+        ]
+      },
+      {
+        "Id": 2,
+        "QuizId": 1,
+        "Text": "Hoeveel provincies heeft Nederland?",
+        "TimeLimitSeconds": 10,
+        "Answers": [
+          {
+            "Id": 5,
+            "QuestionId": 2,
+            "Label": "A",
+            "Text": "10",
+            "IsCorrect": false
+          },
+          {
+            "Id": 6,
+            "QuestionId": 2,
+            "Label": "B",
+            "Text": "12",
+            "IsCorrect": true
+          },
+          {
+            "Id": 7,
+            "QuestionId": 2,
+            "Label": "C",
+            "Text": "14",
+            "IsCorrect": false
+          },
+          {
+            "Id": 8,
+            "QuestionId": 2,
+            "Label": "D",
+            "Text": "11",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Title": "Geschiedenis",
+    "Questions": [
+      {
+        "Id": 3,
+        "QuizId": 2,
+        "Text": "In welk jaar viel de Berlijnse Muur?",
+        "TimeLimitSeconds": 15,
+        "Answers": [
+          {
+            "Id": 9,
+            "QuestionId": 3,
+            "Label": "A",
+            "Text": "1987",
+            "IsCorrect": false
+          },
+          {
+            "Id": 10,
+            "QuestionId": 3,
+            "Label": "B",
+            "Text": "1989",
+            "IsCorrect": true
+          },
+          {
+            "Id": 11,
+            "QuestionId": 3,
+            "Label": "C",
+            "Text": "1991",
+            "IsCorrect": false
+          },
+          {
+            "Id": 12,
+            "QuestionId": 3,
+            "Label": "D",
+            "Text": "1993",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ]
+  }
+]

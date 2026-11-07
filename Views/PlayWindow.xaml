@@ -1,38 +1,34 @@
 ﻿<Window x:Class="QuizTime.Views.PlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Quiz Time - Speelscherm" Height="500" Width="800"
+        Title="Quiz Time - Speelscherm" Height="650" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-       
         <DockPanel Grid.Row="0" Margin="0,0,0,20">
-            <TextBlock x:Name="CategoryText" DockPanel.Dock="Left" Text="Dieren" FontSize="20"
+            <TextBlock x:Name="CategoryText" DockPanel.Dock="Left" Text="Quiz" FontSize="20"
                        FontWeight="SemiBold"/>
-            <TextBlock x:Name="TimerText" DockPanel.Dock="Right" Text="30" FontSize="28"/>
+            <TextBlock x:Name="TimerText" DockPanel.Dock="Right" Text="0" FontSize="28"
+                       HorizontalAlignment="Right"/>
         </DockPanel>
 
-        <TextBlock x:Name="QuestionText" Grid.Row="1" Text="Wat is het snelste landdier ter wereld?" FontSize="32"
-                   FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,30"/>
+        <TextBlock x:Name="QuestionText" Grid.Row="1" Text="Nog geen vraag geladen." FontSize="32"
+                   FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,20"/>
 
-             <StackPanel Grid.Row="2">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="15">
-                <TextBlock Text="Cheetah" FontSize="22"/>
-            </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="15">
-                <TextBlock Text="Leeuw" FontSize="22"/>
-            </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="15">
-                <TextBlock Text="Gazelle" FontSize="22"/>
-            </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="15">
-                <TextBlock Text="Paard" FontSize="22"/>
-            </Border>
-        </StackPanel>
+        <ItemsControl x:Name="AnswersList" Grid.Row="3">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="15">
+                        <TextBlock FontSize="22"><Run Text="{Binding Label, Mode=OneWay}"/><Run Text=". "/><Run Text="{Binding Text, Mode=OneWay}"/></TextBlock>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

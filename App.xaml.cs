@@ -12,8 +12,9 @@ namespace QuizTime
         {
             base.OnStartup(e);
 
-            var operatorWindow = new Views.OperatorWindow();
+            
             var playWindow = new Views.PlayWindow();
+            var operatorWindow = new Views.OperatorWindow(playWindow);
 
             operatorWindow.Show();
             playWindow.Show();

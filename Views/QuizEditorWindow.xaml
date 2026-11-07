@@ -11,7 +11,7 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button x:Name="SaveButton" Content="Opslaan" Width="100" Height="30" Margin="5"/>
+            <Button x:Name="SaveButton" Content="Opslaan" Width="100" Height="30" Margin="5" Click="SaveButton_Click"/>
             <Button x:Name="CancelButton" Content="Annuleren" Width="100" Height="30" Margin="5" IsCancel="True"/>
         </StackPanel>
 

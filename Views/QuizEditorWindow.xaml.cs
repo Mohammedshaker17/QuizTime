@@ -14,5 +14,12 @@ namespace QuizTime.Views
         {
             new QuestionEditorWindow { Owner = this }.ShowDialog();
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+        }
     }
 }
+    
