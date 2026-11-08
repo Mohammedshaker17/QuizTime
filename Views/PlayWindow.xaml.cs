@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using QuizTime.Models;
 
@@ -12,6 +14,13 @@ namespace QuizTime.Views
         // Deze timer "tikt" elke seconde.
         private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
+
+
+        // Geluid dat de hele vraag door blijft spelen (in een lus),
+        // en een apart geluid voor als de tijd om is.
+        private readonly MediaPlayer _questionSound = new();
+        private readonly MediaPlayer _timeUpSound = new();
+
         private Quiz? _quiz;
         private int _currentIndex;
         private int _secondsLeft;
@@ -20,6 +29,13 @@ namespace QuizTime.Views
         {
             InitializeComponent();
             _timer.Tick += Timer_Tick;
+            
+            // Is het vraaggeluid klaar? Dan opnieuw vanaf het begin: zo blijft het doorspelen.
+            _questionSound.MediaEnded += (sender, e) =>
+            {
+                _questionSound.Position = TimeSpan.Zero;
+                _questionSound.Play();
+            };
         }
 
         public void StartQuiz(Quiz quiz)
@@ -46,6 +62,7 @@ namespace QuizTime.Views
             _secondsLeft = question.TimeLimitSeconds;
             TimerText.Text = _secondsLeft.ToString();
             _timer.Start();
+            PlaySound(_questionSound, "question.wav");
         }
 
         public void NextQuestion()
@@ -61,13 +78,29 @@ namespace QuizTime.Views
         public string StatusText =>
             _quiz == null ? "Nog geen quiz geladen." : $"Vraag {_currentIndex + 1} van {_quiz.Questions.Count}";
 
+        // Speelt een geluid uit de map Sounds (naast het programma).
+        // Bestaat het bestand niet, dan gebeurt er gewoon niets.
+        private static void PlaySound(MediaPlayer player, string fileName)
+        {
+            string path = Path.Combine(AppContext.BaseDirectory, "Sounds", fileName);
+            if (!File.Exists(path))
+            {
+                return;
+            }
+
+            player.Open(new Uri(path));
+            player.Play();
+        }
+
         private void Timer_Tick(object? sender, EventArgs e)
         {
             _secondsLeft--;
+            _questionSound.Stop();
 
             if (_secondsLeft <= 0)
             {
                 _timer.Stop();
+                PlaySound(_timeUpSound, "timeup.wav");
                 TimerText.Text = "Tijd is om!";
                 return;
             }
