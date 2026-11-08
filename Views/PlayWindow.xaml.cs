@@ -95,11 +95,12 @@ namespace QuizTime.Views
         private void Timer_Tick(object? sender, EventArgs e)
         {
             _secondsLeft--;
-            _questionSound.Stop();
+            
 
             if (_secondsLeft <= 0)
             {
                 _timer.Stop();
+                _questionSound.Stop();
                 PlaySound(_timeUpSound, "timeup.wav");
                 TimerText.Text = "Tijd is om!";
                 return;
