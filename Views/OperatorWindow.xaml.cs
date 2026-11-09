@@ -81,6 +81,9 @@ namespace QuizTime.Views
 
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
+            var adminWindow = new AdminWindow();
+            adminWindow.Owner = this;
+            adminWindow.ShowDialog();
 
         }
     }
