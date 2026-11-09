@@ -15,10 +15,18 @@ namespace QuizTime.Views
             new QuestionEditorWindow { Owner = this }.ShowDialog();
         }
 
+        // De titel die de gebruiker heeft ingevuld (zonder spaties ervoor/erna).
+        public string QuizTitle => TitleTextBox.Text.Trim();
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (QuizTitle == "")
+            {
+                MessageBox.Show("Vul een titel in.");
+                return;
+            }
 
+            DialogResult = true;
         }
     }
 }

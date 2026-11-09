@@ -6,7 +6,7 @@
     <DockPanel Margin="20">
         <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="Titel van de quiz:" Margin="0,0,0,5"/>
-            <TextBox x:Name="TitleTextBox" Text="Voorbeeldquiz - Gemengde Categorieën" Height="25" Margin="0,0,0,15"/>
+            <TextBox x:Name="TitleTextBox" Height="25" Margin="0,0,0,15"/>
             <TextBlock Text="Vragen:" Margin="0,0,0,5"/>
         </StackPanel>
 
@@ -21,12 +21,6 @@
             <Button x:Name="DeleteQuestionButton" Content="Vraag verwijderen" Width="130" Height="30" Margin="0,0,0,5"/>
         </StackPanel>
 
-        <!-- Voorlopig vaste voorbeeldvragen; later komen hier de echte vragen. -->
-        <ListBox x:Name="QuestionListBox">
-            <ListBoxItem Content="[Dieren] Wat is het snelste landdier ter wereld?"/>
-            <ListBoxItem Content="[Dieren] Hoeveel poten heeft een spin?"/>
-            <ListBoxItem Content="[Geschiedenis] In welk jaar viel de Berlijnse Muur?"/>
-            <ListBoxItem Content="[Geschiedenis] Wie zette als eerste mens voet op de maan?"/>
-        </ListBox>
+        <ListBox x:Name="QuestionListBox"/>
     </DockPanel>
 </Window>
