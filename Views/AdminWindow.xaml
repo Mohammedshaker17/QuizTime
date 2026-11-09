@@ -11,12 +11,13 @@
             <Button x:Name="EditQuizButton" Content="Bewerken" Width="120" Height="30" Margin="5" Click="OpenQuizEditor_Click"/>
             <Button x:Name="DeleteQuizButton" Content="Verwijderen" Width="120" Height="30" Margin="5"/>
         </StackPanel>
-
-        <!-- Voorlopig vaste voorbeelditems; later komen hier de echte quizzen. -->
+        
         <ListBox x:Name="QuizListBox">
-            <ListBoxItem Content="Voorbeeldquiz - Gemengde Categorieën (4 vragen)"/>
-            <ListBoxItem Content="Dierenquiz (10 vragen)"/>
-            <ListBoxItem Content="Geschiedenisquiz (8 vragen)"/>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock><Run Text="{Binding Title, Mode=OneWay}"/><Run Text=" ("/><Run Text="{Binding Questions.Count, Mode=OneWay}"/><Run Text=" vragen)"/></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </DockPanel>
 </Window>
