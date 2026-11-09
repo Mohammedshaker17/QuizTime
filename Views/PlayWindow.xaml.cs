@@ -25,6 +25,10 @@ namespace QuizTime.Views
         private int _currentIndex;
         private int _secondsLeft;
 
+        // true = nakijken: geen timer en geen geluid.
+        private bool _isReviewMode;
+
+
         public PlayWindow()
         {
             InitializeComponent();
@@ -38,9 +42,11 @@ namespace QuizTime.Views
             };
         }
 
-        public void StartQuiz(Quiz quiz)
+        public void StartQuiz(Quiz quiz, bool reviewMode)
         {
             _quiz = quiz;
+            _isReviewMode = reviewMode;
+
             ShowQuestion(0);
         }
 
@@ -57,7 +63,18 @@ namespace QuizTime.Views
             CategoryText.Text = $"{_quiz.Title} - Vraag {index + 1}/{_quiz.Questions.Count}";
             QuestionText.Text = question.Text;
             AnswersList.ItemsSource = question.Answers.OrderBy(a => a.Label).ToList();
-         
+
+            // Bij elke nieuwe vraag het juiste antwoord weer verbergen.
+            CorrectAnswerText.Visibility = Visibility.Collapsed;
+
+            if (_isReviewMode)
+            {
+                _timer.Stop();
+                _questionSound.Stop();
+                TimerText.Text = "Nakijken";
+                return;
+            }
+
             // Elke vraag heeft zijn eigen tijd: opnieuw beginnen met aftellen.
             _secondsLeft = question.TimeLimitSeconds;
             TimerText.Text = _secondsLeft.ToString();
@@ -74,6 +91,23 @@ namespace QuizTime.Views
         {
             ShowQuestion(_currentIndex - 1);
         }
+
+        public void ShowCorrectAnswer()
+        {
+            if (_quiz == null)
+            {
+                return;
+            }
+
+            Question question = _quiz.Questions[_currentIndex];
+            Answer? correct = question.Answers.FirstOrDefault(a => a.IsCorrect);
+
+            CorrectAnswerText.Text = correct == null
+                ? "Geen juist antwoord ingesteld."
+                : $"Juiste antwoord: {correct.Label}. {correct.Text}";
+            CorrectAnswerText.Visibility = Visibility.Visible;
+        }
+
 
         public string StatusText =>
             _quiz == null ? "Nog geen quiz geladen." : $"Vraag {_currentIndex + 1} van {_quiz.Questions.Count}";

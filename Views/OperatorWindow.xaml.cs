@@ -33,7 +33,17 @@ namespace QuizTime.Views
             CategoryComboBox.SelectedIndex = 0;
         }
 
-        private void StartPlayButton_Click(object sender, RoutedEventArgs e)
+               private void StartPlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            StartSelectedQuiz(false);
+        }
+
+        private void StartReviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            StartSelectedQuiz(true);
+        }
+
+        private void StartSelectedQuiz(bool reviewMode)
         {
             if (CategoryComboBox.SelectedItem is not Quiz quiz)
             {
@@ -47,7 +57,7 @@ namespace QuizTime.Views
                 return;
             }
 
-            _playWindow.StartQuiz(quiz);
+            _playWindow.StartQuiz(quiz, reviewMode);
             StatusText.Text = _playWindow.StatusText;
         }
 
@@ -62,6 +72,12 @@ namespace QuizTime.Views
             _playWindow.NextQuestion();
             StatusText.Text = _playWindow.StatusText;
         }
+
+        private void RevealAnswerButton_Click(object sender, RoutedEventArgs e)
+        {
+            _playWindow.ShowCorrectAnswer();
+        }
+
 
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
