@@ -45,9 +45,27 @@ namespace QuizTime.Views
         }
 
 
-        private void OpenQuizEditor_Click(object sender, RoutedEventArgs e)
+        private void EditQuizButton_Click(object sender, RoutedEventArgs e)
         {
-            new QuizEditorWindow { Owner = this }.ShowDialog();
+            // Welke quiz is er aangeklikt in de lijst?
+            if (QuizListBox.SelectedItem is not Quiz quiz)
+            {
+                MessageBox.Show("Kies eerst een quiz uit de lijst.");
+                return;
+            }
+
+            var editor = new QuizEditorWindow(quiz);
+            editor.Owner = this;
+
+            if (editor.ShowDialog() != true)
+            {
+                return;
+            }
+
+            quiz.Title = editor.QuizTitle;
+            _quizService.SaveQuizzes(_quizzes);
+
+            QuizListBox.Items.Refresh();
         }
     }
 }

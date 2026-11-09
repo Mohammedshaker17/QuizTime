@@ -8,7 +8,7 @@
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
             <Button x:Name="NewQuizButton" Content="Nieuwe quiz" Width="120" Height="30" Margin="5" Click="NewQuizButton_Click"/>
-            <Button x:Name="EditQuizButton" Content="Bewerken" Width="120" Height="30" Margin="5" Click="OpenQuizEditor_Click"/>
+            <Button x:Name="EditQuizButton" Content="Bewerken" Width="120" Height="30" Margin="5" Click="EditQuizButton_Click"/>
             <Button x:Name="DeleteQuizButton" Content="Verwijderen" Width="120" Height="30" Margin="5"/>
         </StackPanel>
         
