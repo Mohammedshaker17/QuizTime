@@ -67,5 +67,33 @@ namespace QuizTime.Views
 
             QuizListBox.Items.Refresh();
         }
+
+
+        private void DeleteQuizButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Welke quiz is er aangeklikt in de lijst?
+            if (QuizListBox.SelectedItem is not Quiz quiz)
+            {
+                MessageBox.Show("Kies eerst een quiz uit de lijst.");
+                return;
+            }
+
+            // Eerst vragen of het echt de bedoeling is.
+            MessageBoxResult answer = MessageBox.Show(
+                $"Weet je zeker dat je \"{quiz.Title}\" wilt verwijderen?",
+                "Verwijderen",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (answer != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            _quizzes.Remove(quiz);
+            _quizService.SaveQuizzes(_quizzes);
+
+            QuizListBox.Items.Refresh();
+        }
     }
 }
