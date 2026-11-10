@@ -79,41 +79,82 @@
   },
   {
     "Id": 2,
-    "Title": "Geschiedenis",
+    "Title": "Fruiten",
+    "Questions": []
+  },
+  {
+    "Id": 3,
+    "Title": "School",
     "Questions": [
       {
         "Id": 3,
-        "QuizId": 2,
-        "Text": "In welk jaar viel de Berlijnse Muur?",
-        "TimeLimitSeconds": 15,
+        "QuizId": 3,
+        "Text": "Wie is de goat?",
+        "TimeLimitSeconds": 30,
         "Answers": [
           {
             "Id": 9,
             "QuestionId": 3,
             "Label": "A",
-            "Text": "1987",
-            "IsCorrect": false
+            "Text": "Peter",
+            "IsCorrect": true
           },
           {
             "Id": 10,
             "QuestionId": 3,
             "Label": "B",
-            "Text": "1989",
-            "IsCorrect": true
+            "Text": "Rick",
+            "IsCorrect": false
           },
           {
             "Id": 11,
             "QuestionId": 3,
             "Label": "C",
-            "Text": "1991",
+            "Text": "mo",
             "IsCorrect": false
           },
           {
             "Id": 12,
             "QuestionId": 3,
             "Label": "D",
-            "Text": "1993",
+            "Text": "mo",
             "IsCorrect": false
+          }
+        ]
+      },
+      {
+        "Id": 4,
+        "QuizId": 3,
+        "Text": "patat",
+        "TimeLimitSeconds": 20,
+        "Answers": [
+          {
+            "Id": 13,
+            "QuestionId": 4,
+            "Label": "A",
+            "Text": "sambusah",
+            "IsCorrect": false
+          },
+          {
+            "Id": 14,
+            "QuestionId": 4,
+            "Label": "B",
+            "Text": "hh",
+            "IsCorrect": false
+          },
+          {
+            "Id": 15,
+            "QuestionId": 4,
+            "Label": "C",
+            "Text": "hhh",
+            "IsCorrect": false
+          },
+          {
+            "Id": 16,
+            "QuestionId": 4,
+            "Label": "D",
+            "Text": "hh",
+            "IsCorrect": true
           }
         ]
       }

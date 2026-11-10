@@ -5,35 +5,31 @@
         WindowStartupLocation="CenterOwner">
     <StackPanel Margin="20">
         <TextBlock Text="Vraag:" Margin="0,0,0,5"/>
-        <TextBox x:Name="QuestionTextBox" Text="Wat is het snelste landdier ter wereld?" Height="50" TextWrapping="Wrap" Margin="0,0,0,15"/>
+        <TextBox x:Name="QuestionTextBox" Height="50" TextWrapping="Wrap" Margin="0,0,0,15"/>
 
-        <TextBlock Text="Categorie:" Margin="0,0,0,5"/>
-        <ComboBox x:Name="CategoryComboBox" IsEditable="True" Height="25" Margin="0,0,0,15">
-            <!-- Voorlopig vaste voorbeeldcategorieën. -->
-            <ComboBoxItem Content="Dieren" IsSelected="True"/>
-            <ComboBoxItem Content="Geschiedenis"/>
-        </ComboBox>
+        <TextBlock Text="Tijd (seconden):" Margin="0,0,0,5"/>
+        <TextBox x:Name="TimeTextBox" Text="20" Width="80" Height="25" HorizontalAlignment="Left" Margin="0,0,0,15"/>
 
         <TextBlock Text="Antwoorden (vink het juiste antwoord aan):" Margin="0,0,0,5"/>
         <DockPanel Margin="0,0,0,5">
-            <RadioButton x:Name="CorrectRadio0" GroupName="Correct" IsChecked="True" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <TextBox x:Name="OptionTextBox0" Text="Cheetah" Height="25"/>
+            <RadioButton x:Name="CorrectRadio0" GroupName="Correct"  VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox x:Name="OptionTextBox0" Height="25"/>
         </DockPanel>
         <DockPanel Margin="0,0,0,5">
             <RadioButton x:Name="CorrectRadio1" GroupName="Correct" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <TextBox x:Name="OptionTextBox1" Text="Leeuw" Height="25"/>
+            <TextBox x:Name="OptionTextBox1" Height="25"/>
         </DockPanel>
         <DockPanel Margin="0,0,0,5">
             <RadioButton x:Name="CorrectRadio2" GroupName="Correct" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <TextBox x:Name="OptionTextBox2" Text="Gazelle" Height="25"/>
+            <TextBox x:Name="OptionTextBox2" Height="25"/>
         </DockPanel>
         <DockPanel Margin="0,0,0,5">
             <RadioButton x:Name="CorrectRadio3" GroupName="Correct" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <TextBox x:Name="OptionTextBox3" Text="Paard" Height="25"/>
+            <TextBox x:Name="OptionTextBox3" Height="25"/>
         </DockPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button x:Name="SaveButton" Content="Opslaan" Width="100" Height="30" Margin="5"/>
+            <Button x:Name="SaveButton" Content="Opslaan" Width="100" Height="30" Margin="5" Click="SaveButton_Click"/>
             <Button x:Name="CancelButton" Content="Annuleren" Width="100" Height="30" Margin="5" IsCancel="True"/>
         </StackPanel>
     </StackPanel>

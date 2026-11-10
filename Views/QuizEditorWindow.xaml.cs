@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Collections.Generic;
 using QuizTime.Models;
 
 namespace QuizTime.Views
@@ -7,17 +8,22 @@ namespace QuizTime.Views
     public partial class QuizEditorWindow : Window
     {
 
+        public List<Question> Questions { get; } = new();
+
         public QuizEditorWindow()
         {
             InitializeComponent();
+
+            QuestionListBox.ItemsSource = Questions;
+            QuestionListBox.DisplayMemberPath = "Text";
         }
 
         public QuizEditorWindow(Quiz quiz) : this()
         {
             TitleTextBox.Text = quiz.Title;
 
-            QuestionListBox.ItemsSource = quiz.Questions;
-            QuestionListBox.DisplayMemberPath = "Text";
+            Questions.AddRange(quiz.Questions);
+            QuestionListBox.Items.Refresh();
         }
 
         private void OpenQuestionEditor_Click(object sender, RoutedEventArgs e)
@@ -38,6 +44,22 @@ namespace QuizTime.Views
 
             DialogResult = true;
         }
+
+
+        private void AddQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            var editor = new QuestionEditorWindow();
+            editor.Owner = this;
+
+            if (editor.ShowDialog() != true || editor.SavedQuestion == null)
+            {
+                return;
+            }
+
+            Questions.Add(editor.SavedQuestion);
+            QuestionListBox.Items.Refresh();
+        }
+
     }
 }
     

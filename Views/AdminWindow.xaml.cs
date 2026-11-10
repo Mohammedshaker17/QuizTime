@@ -6,7 +6,6 @@ using QuizTime.Services;
 
 namespace QuizTime.Views
 {
-    // Alleen de voorkant: de knoppen openen het volgende scherm, er wordt nog niets opgeslagen.
     public partial class AdminWindow : Window
     {
         private readonly QuizService _quizService = new();
@@ -34,16 +33,17 @@ namespace QuizTime.Views
             var newQuiz = new Quiz
             {
                 Id = _quizzes.Count == 0 ? 1 : _quizzes.Max(q => q.Id) + 1,
-                Title = editor.QuizTitle
+                Title = editor.QuizTitle,
+                Questions = editor.Questions
             };
 
             _quizzes.Add(newQuiz);
+            AssignIds(newQuiz);
             _quizService.SaveQuizzes(_quizzes);
 
             // Lijst opnieuw tonen, zodat de nieuwe quiz erin staat.
             QuizListBox.Items.Refresh();
         }
-
 
         private void EditQuizButton_Click(object sender, RoutedEventArgs e)
         {
@@ -63,11 +63,12 @@ namespace QuizTime.Views
             }
 
             quiz.Title = editor.QuizTitle;
+            quiz.Questions = editor.Questions;
+            AssignIds(quiz);
             _quizService.SaveQuizzes(_quizzes);
 
             QuizListBox.Items.Refresh();
         }
-
 
         private void DeleteQuizButton_Click(object sender, RoutedEventArgs e)
         {
@@ -94,6 +95,35 @@ namespace QuizTime.Views
             _quizService.SaveQuizzes(_quizzes);
 
             QuizListBox.Items.Refresh();
+        }
+
+        // Geeft nieuwe vragen en antwoorden (Id = 0) een uniek Id,
+        // en zet QuizId en QuestionId goed.
+        private void AssignIds(Quiz quiz)
+        {
+            List<Question> allQuestions = _quizzes.SelectMany(q => q.Questions).ToList();
+            int nextQuestionId = allQuestions.Select(q => q.Id).DefaultIfEmpty(0).Max() + 1;
+            int nextAnswerId = allQuestions.SelectMany(q => q.Answers).Select(a => a.Id).DefaultIfEmpty(0).Max() + 1;
+
+            foreach (Question question in quiz.Questions)
+            {
+                question.QuizId = quiz.Id;
+                if (question.Id == 0)
+                {
+                    question.Id = nextQuestionId;
+                    nextQuestionId++;
+                }
+
+                foreach (Answer answer in question.Answers)
+                {
+                    answer.QuestionId = question.Id;
+                    if (answer.Id == 0)
+                    {
+                        answer.Id = nextAnswerId;
+                        nextAnswerId++;
+                    }
+                }
+            }
         }
     }
 }

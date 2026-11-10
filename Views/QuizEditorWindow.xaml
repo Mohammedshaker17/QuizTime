@@ -16,7 +16,7 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
-            <Button x:Name="AddQuestionButton" Content="Vraag toevoegen" Width="130" Height="30" Margin="0,0,0,5" Click="OpenQuestionEditor_Click"/>
+            <Button x:Name="AddQuestionButton" Content="Vraag toevoegen" Width="130" Height="30" Margin="0,0,0,5" Click="AddQuestionButton_Click"/>
             <Button x:Name="EditQuestionButton" Content="Vraag bewerken" Width="130" Height="30" Margin="0,0,0,5" Click="OpenQuestionEditor_Click"/>
             <Button x:Name="DeleteQuestionButton" Content="Vraag verwijderen" Width="130" Height="30" Margin="0,0,0,5"/>
         </StackPanel>
