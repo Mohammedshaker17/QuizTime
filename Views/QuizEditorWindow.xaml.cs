@@ -78,6 +78,32 @@ namespace QuizTime.Views
             QuestionListBox.Items.Refresh();
         }
 
+
+        private void DeleteQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Welke vraag is er aangeklikt in de lijst?
+            if (QuestionListBox.SelectedItem is not Question question)
+            {
+                MessageBox.Show("Kies eerst een vraag uit de lijst.");
+                return;
+            }
+
+            // Eerst vragen of het echt de bedoeling is.
+            MessageBoxResult answer = MessageBox.Show(
+                $"Weet je zeker dat je \"{question.Text}\" wilt verwijderen?",
+                "Vraag verwijderen",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (answer != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            Questions.Remove(question);
+            QuestionListBox.Items.Refresh();
+        }
+
     }
 }
     

@@ -125,36 +125,36 @@
       {
         "Id": 4,
         "QuizId": 3,
-        "Text": "patat",
+        "Text": "Chicken banana",
         "TimeLimitSeconds": 20,
         "Answers": [
           {
-            "Id": 13,
+            "Id": 21,
             "QuestionId": 4,
             "Label": "A",
-            "Text": "sambusah",
+            "Text": "Hallo",
             "IsCorrect": false
           },
           {
-            "Id": 14,
+            "Id": 22,
             "QuestionId": 4,
             "Label": "B",
-            "Text": "hh",
-            "IsCorrect": false
+            "Text": "nbbb",
+            "IsCorrect": true
           },
           {
-            "Id": 15,
+            "Id": 23,
             "QuestionId": 4,
             "Label": "C",
-            "Text": "hhh",
+            "Text": "b",
             "IsCorrect": false
           },
           {
-            "Id": 16,
+            "Id": 24,
             "QuestionId": 4,
             "Label": "D",
-            "Text": "hh",
-            "IsCorrect": true
+            "Text": "b",
+            "IsCorrect": false
           }
         ]
       }
