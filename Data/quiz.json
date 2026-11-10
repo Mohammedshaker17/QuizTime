@@ -89,32 +89,32 @@
       {
         "Id": 3,
         "QuizId": 3,
-        "Text": "Wie is de goat?",
-        "TimeLimitSeconds": 30,
+        "Text": "Wie is de goat!",
+        "TimeLimitSeconds": 10,
         "Answers": [
           {
-            "Id": 9,
+            "Id": 17,
             "QuestionId": 3,
             "Label": "A",
             "Text": "Peter",
-            "IsCorrect": true
-          },
-          {
-            "Id": 10,
-            "QuestionId": 3,
-            "Label": "B",
-            "Text": "Rick",
             "IsCorrect": false
           },
           {
-            "Id": 11,
+            "Id": 18,
+            "QuestionId": 3,
+            "Label": "B",
+            "Text": "Rick",
+            "IsCorrect": true
+          },
+          {
+            "Id": 19,
             "QuestionId": 3,
             "Label": "C",
             "Text": "mo",
             "IsCorrect": false
           },
           {
-            "Id": 12,
+            "Id": 20,
             "QuestionId": 3,
             "Label": "D",
             "Text": "mo",

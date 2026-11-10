@@ -13,6 +13,28 @@ namespace QuizTime.Views
             InitializeComponent();
         }
 
+        // Het Id van de vraag die wordt bewerkt 
+        private readonly int _questionId;
+
+        // Tweede constructor: een bestaande vraag bewerken.
+        public QuestionEditorWindow(Question question) : this()
+        {
+            _questionId = question.Id;
+
+            QuestionTextBox.Text = question.Text;
+            TimeTextBox.Text = question.TimeLimitSeconds.ToString();
+
+            TextBox[] answerBoxes = { OptionTextBox0, OptionTextBox1, OptionTextBox2, OptionTextBox3 };
+            RadioButton[] correctRadios = { CorrectRadio0, CorrectRadio1, CorrectRadio2, CorrectRadio3 };
+
+            for (int i = 0; i < question.Answers.Count && i < 4; i++)
+            {
+                answerBoxes[i].Text = question.Answers[i].Text;
+                correctRadios[i].IsChecked = question.Answers[i].IsCorrect;
+            }
+        }
+
+
 
         // De vraag die is ingevuld; pas gevuld na "Opslaan".
         public Question? SavedQuestion { get; private set; }
@@ -67,6 +89,7 @@ namespace QuizTime.Views
 
             SavedQuestion = new Question
             {
+                Id = _questionId,
                 Text = questionText,
                 TimeLimitSeconds = seconds,
                 Answers = answers

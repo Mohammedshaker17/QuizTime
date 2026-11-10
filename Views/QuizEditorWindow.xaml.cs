@@ -26,9 +26,27 @@ namespace QuizTime.Views
             QuestionListBox.Items.Refresh();
         }
 
-        private void OpenQuestionEditor_Click(object sender, RoutedEventArgs e)
+        private void EditQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            new QuestionEditorWindow { Owner = this }.ShowDialog();
+            // Welke vraag is er aangeklikt in de lijst?
+            if (QuestionListBox.SelectedItem is not Question question)
+            {
+                MessageBox.Show("Kies eerst een vraag uit de lijst.");
+                return;
+            }
+
+            var editor = new QuestionEditorWindow(question);
+            editor.Owner = this;
+
+            if (editor.ShowDialog() != true || editor.SavedQuestion == null)
+            {
+                return;
+            }
+
+            // De oude vraag vervangen door de nieuwe, op dezelfde plek in de lijst.
+            int index = Questions.IndexOf(question);
+            Questions[index] = editor.SavedQuestion;
+            QuestionListBox.Items.Refresh();
         }
 
         // De titel die de gebruiker heeft ingevuld (zonder spaties ervoor/erna).
